@@ -5,8 +5,7 @@ import MatchCardSlider from './components/cards/MatchSlider'
 import Rankings from './components/rankings/Rankings'
 
 function App() {
-
-  return(
+  return (
     <>
     {/* <LoginForm/> */}
     <Header/>
@@ -16,7 +15,7 @@ function App() {
     <Rankings/>
     </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
