@@ -1,5 +1,11 @@
+import { useNavigate } from "react-router-dom"
 
 const Header = () => {
+  const navigate=useNavigate()
+  const handleLogout=()=>{
+    localStorage.removeItem("accessToken")
+    navigate("/")
+  }
   return (
     <div className="flex w-screen bg-blue-600 py-3 "> 
     <div className="flex  w-[40%] justify-center items-center gap-6 text-white font-semibold">
@@ -13,6 +19,7 @@ const Header = () => {
     </div>
     <div className=" w-screen flex justify-end ">
         <button className="rounded-lg bg-black text-white py-1 px-2 mr-16 ">Chat Now!</button>
+        <button className="rounded-lg bg-black text-white py-1 px-2 mr-16 " onClick={handleLogout}>Logout</button>
     </div>
     </div>
   )

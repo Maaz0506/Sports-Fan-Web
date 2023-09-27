@@ -2,30 +2,30 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const MatchCard = ({ matchData }) => {
+const MatchCard = () => {
   const [score, setScore] = useState([]);
   const [matchStats, setMatchStats] = useState([]);
 
+  const options = {
+    method: "GET",
+    url: "https://cricbuzz-cricket.p.rapidapi.com/mcenter/v1/40381/scard",
+    headers: {
+      "X-RapidAPI-Key": "683352a4e5msh1fd0bf5d197cfeep1fa887jsn54c414f1b212",
+      "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
+    },
+  };
   useEffect(() => {
-    const options = {
-      method: "GET",
-      url: "https://cricbuzz-cricket.p.rapidapi.com/mcenter/v1/40381/scard",
-      headers: {
-        "X-RapidAPI-Key": "c33ccecd3emshc0154b04d0db2e3p1f72d2jsn6a6517789dbb",
-        "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
-      },
-    };
     const handleResult = async () => {
       try {
         const response = await axios.request(options);
         setScore(response.data);
         setMatchStats(response.data[2][1]);
-        // console.log(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
     };
-    handleResult();
+    // handleResult();
   }, []);
 
   return (
@@ -45,8 +45,8 @@ MatchCard.propTypes = {
   matchData: PropTypes.shape({
     team1: PropTypes.string.isRequired,
     team2: PropTypes.string.isRequired,
-    // date: PropTypes.string.isRequired,
-    // location: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
     result: PropTypes.string.isRequired,
   }).isRequired,
 };
