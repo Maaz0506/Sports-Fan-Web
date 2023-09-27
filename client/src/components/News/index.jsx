@@ -5,7 +5,30 @@ import axios from "axios"
 const News = () => {
   
   const [news,setNews]=useState([])
-  
+  const [imageId,setImageId]=useState("")
+  const [image,setImage]=useState([])
+// useEffect(()=>{
+//   const handleImageRendering=async()=>{
+//     const optionsImage = {
+//       method: 'GET',
+//       url: `https://cricbuzz-cricket.p.rapidapi.com/img/v1/i1/${imageId}/i.jpg`,
+//       headers: {
+//         'X-RapidAPI-Key': '683352a4e5msh1fd0bf5d197cfeep1fa887jsn54c414f1b212',
+//         'X-RapidAPI-Host': 'cricbuzz-cricket.p.rapidapi.com'
+//       }
+//     };
+    
+//     try {
+//       const response = await axios.request(optionsImage);
+//       console.log(response.data);
+//       setImage(response.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//       handleImageRendering()
+//   }
+// })
+
 const options = {
     method: 'GET',
     url: 'https://cricbuzz-cricket.p.rapidapi.com/news/v1/index',

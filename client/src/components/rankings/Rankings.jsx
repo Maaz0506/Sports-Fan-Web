@@ -2,17 +2,20 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 const Rankings = () => {
   const [rankings, setRankings] = useState([]);
+  const [format,setFormat]=useState("odi")
+  const [type,setType]=useState("")
 
-  const options = {
-    method: "GET",
-    url: "https://cricbuzz-cricket.p.rapidapi.com/stats/v1/rankings/teams",
-    params: { formatType: "odi" },
-    headers: {
-      "X-RapidAPI-Key": "683352a4e5msh1fd0bf5d197cfeep1fa887jsn54c414f1b212",
-      "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
-    },
-  };
+ 
   useEffect(() => {
+    const options = {
+      method: "GET",
+      url: "https://cricbuzz-cricket.p.rapidapi.com/stats/v1/rankings/teams",
+      params: { formatType: format},
+      headers: {
+        "X-RapidAPI-Key": "683352a4e5msh1fd0bf5d197cfeep1fa887jsn54c414f1b212",
+        "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
+      },
+    };
     const handleRankings = async () => {
       try {
         const response = await axios.request(options);
@@ -22,8 +25,8 @@ const Rankings = () => {
         console.error(error);
       }
     };
-    handleRankings();
-  }, []);
+    // handleRankings();
+  }, [format]);
 
   return (
     <div className="flex flex-col items-center w-[20%] h-full">
@@ -32,13 +35,13 @@ const Rankings = () => {
   </div>
   <div className="flex flex-col justify-center bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl text-white gap-2 p-4">
     <div className="flex gap-6">
-      <button className="bg-blue-500 hover:bg-blue-600 text-white text-md font-semibold px-4 py-2 rounded-xl transition-colors duration-300">
+      <button className="bg-blue-500 hover:bg-blue-600 text-white text-md font-semibold px-4 py-2 rounded-xl transition-colors duration-300" onClick={()=>{setFormat("test")}}>
         Test
       </button>
-      <button className="bg-blue-500 hover:bg-blue-600 text-white text-md font-semibold px-4 py-2 rounded-xl transition-colors duration-300">
+      <button className="bg-blue-500 hover:bg-blue-600 text-white text-md font-semibold px-4 py-2 rounded-xl transition-colors duration-300" onClick={()=>{setFormat("odi")}}>
         ODI
       </button>
-      <button className="bg-blue-500 hover:bg-blue-600 text-white text-md font-semibold px-4 py-2 rounded-xl transition-colors duration-300">
+      <button className="bg-blue-500 hover:bg-blue-600 text-white text-md font-semibold px-4 py-2 rounded-xl transition-colors duration-300" onClick={()=>{setFormat("t20")}}>
         T20I
       </button>
     </div>

@@ -18,10 +18,15 @@ const Login = () => {
         password: password,
       });
       const accessToken=data.data.accessToken
+      console.log(data.status)
+      console.log(data.statusText)
       if (data.status === 200) {
         navigate("/dashboard");
         localStorage.setItem("accessToken",accessToken)
       
+      }
+      else if(data.status===401){
+        alert("User doesnot exist.. Register first")
       }
     } catch (error) {
       console.log(error);
