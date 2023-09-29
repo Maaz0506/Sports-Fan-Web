@@ -18,8 +18,6 @@ const Login = () => {
         password: password,
       });
       const accessToken=data.data.accessToken
-      console.log(data.status)
-      console.log(data.statusText)
       if (data.status === 200) {
         navigate("/dashboard");
         localStorage.setItem("accessToken",accessToken)

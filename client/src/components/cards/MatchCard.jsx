@@ -5,6 +5,7 @@ import axios from "axios";
 const MatchCard = () => {
   const [details, setDetails] = useState([]);
   const [matchStats, setMatchStats] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   const options = {
     method: "GET",
@@ -17,10 +18,13 @@ const MatchCard = () => {
   useEffect(() => {
     const handleResult = async () => {
       try {
+        setIsLoading(true)
         const response = await axios.request(options);
         setMatchStats(response.data.matchHeader.result);
         setDetails(response.data.matchHeader);
+        setIsLoading(false)
       } catch (error) {
+        setIsLoading(true)
         console.error(error);
       }
     };
@@ -28,22 +32,27 @@ const MatchCard = () => {
   }, []);
 
   return (
-    <div className="bg-white shadow-md rounded-md p-4 m-2">
-      {details.map((names, index) => (
-        <div key={index}>
-          <h2 className="text-xl font-semibold">
-            {names.team1.name} vs {names.team2.name}
-          </h2>
-        </div>
-      ))}
-      {matchStats.map((result, index) => (
-        <div key={index}>
-          <p className="text-lg">{result.winningTeam} victorious</p>
-        </div>
-      ))}
-    </div>
-  );
-};
+      isLoading?(
+        <p>Loading..</p>
+      ):(
+        <div className="bg-white shadow-md rounded-md p-4 m-2">
+        {details?.map((names, index) => (
+          <div key={index}>
+            <h2 className="text-xl font-semibold">
+              {names.team1.name} vs {names.team2.name}
+            </h2>
+          </div>
+        ))}
+        {matchStats?.map((result, index) => (
+          <div key={index}>
+            <p className="text-lg">{result.winningTeam} victorious</p>
+          </div>
+        ))}
+      </div>
+    )
+      )
+        }
+    
 
 MatchCard.propTypes = {
   matchData: PropTypes.shape({
