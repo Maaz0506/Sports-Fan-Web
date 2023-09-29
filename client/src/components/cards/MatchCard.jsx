@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const MatchCard = () => {
-  const [score, setScore] = useState([]);
+  const [details, setDetails] = useState([]);
   const [matchStats, setMatchStats] = useState([]);
 
   const options = {
@@ -18,25 +18,29 @@ const MatchCard = () => {
     const handleResult = async () => {
       try {
         const response = await axios.request(options);
-        setScore(response.data);
-        setMatchStats(response.data[2][1]);
-        console.log(response.data);
+        setMatchStats(response.data.matchHeader.result);
+        setDetails(response.data.matchHeader);
       } catch (error) {
         console.error(error);
       }
     };
-    // handleResult();
+    handleResult();
   }, []);
 
   return (
     <div className="bg-white shadow-md rounded-md p-4 m-2">
-      <h2 className="text-xl font-semibold">
-        {matchStats.team1} vs {matchStats.team2}
-      </h2>
-      <p className="text-sm text-gray-500">
-        {matchStats.date} - {matchStats.location}
-      </p>
-      <p className="text-lg">{score.result}</p>
+      {details.map((names, index) => (
+        <div key={index}>
+          <h2 className="text-xl font-semibold">
+            {names.team1.name} vs {names.team2.name}
+          </h2>
+        </div>
+      ))}
+      {matchStats.map((result, index) => (
+        <div key={index}>
+          <p className="text-lg">{result.winningTeam} victorious</p>
+        </div>
+      ))}
     </div>
   );
 };
