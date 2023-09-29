@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 
 const Header = () => {
   const navigate=useNavigate()
@@ -9,12 +9,12 @@ const Header = () => {
   return (
     <div className="flex w-screen bg-blue-600 py-3 "> 
     <div className="flex  w-[40%] justify-center items-center gap-6 text-white font-semibold">
-      <div className="log  text-3xl font-serif">
+      <div className="text-3xl font-serif">
          CoverDrive
       </div>
-      <div className="cursor-pointer ">
+      <Link to={'/news'} className="cursor-pointer ">
         News
-      </div>
+      </Link>
 
     </div>
     <div className=" w-screen flex justify-end ">
